@@ -1,0 +1,33 @@
+body{
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+.cadastro-conta{
+    width: 33%;
+    height: auto;
+    border: #dddddd solid 1px;
+    padding: 5px;
+    margin: 20px auto 20px auto;
+    text-align: center;
+}
+.exibir-contas{
+    width: 40%;
+    height: auto;
+    margin: auto;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
