@@ -1,23 +1,35 @@
 <?php
 
-require_once 'src/Conta.php';
-require_once 'src/Titular.php';
-require_once 'src/Cpf.php';
+require_once "autoload.php";
 
-// $cpf     = new Cpf('021.716.486-27');
-// $titular = new Titular($cpf, 'Lucas Mendes');
-// $conta   = new Conta($titular);
+    use Projeto\Banco\Modelo\Cpf;
+    use Projeto\Banco\Modelo\Pessoa;
+    use Projeto\Banco\Modelo\Funcionario;
 
-// echo $conta->recuperarCpfTitular() . PHP_EOL;
+    $cpf = new Cpf('021.716.486-27');
+    $pessoa      = new Pessoa("Lucas", $cpf);
+    $funcionario = new Funcionario("Lucas", $cpf, "Teste");
+    echo $funcionario->recuperarNome();
+    // print_r($funcionario);
 
-// echo $conta->recuperarNomeTitular() . PHP_EOL;
+    // $endereco = new Endereco('Coronel Fabriciano', 'Melo Viana', 'Rua Maria de lourdes de Jesus', '102');
+    // $titular  = new Titular($cpf, 'Lucas Mendes', $endereco);
+    // $conta    = new Conta($titular);
 
-// $conta->depositar(200);
-// echo $conta->exibirSaldo() . PHP_EOL;
+    // echo $conta->recuperarCpfTitular();
+    // echo "<br>";
 
-// echo Conta::exibirNumeroContas();
+    // echo $conta->recuperarNomeTitular();
+    // echo "<br>";
+
+    // $conta->depositar(200);
+    // echo $conta->exibirSaldo();
+    // echo "<br>";
+
+    // echo Conta::exibirNumeroContas();
+
 ?>
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8">
@@ -47,4 +59,4 @@ require_once 'src/Cpf.php';
             </table>
         </div>
     </body>
-</html>
+</html> -->

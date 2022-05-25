@@ -1,5 +1,7 @@
 <?php
 
+namespace Projeto\Banco\Modelo;
+
 class Cpf
 {
     private $cpf;
