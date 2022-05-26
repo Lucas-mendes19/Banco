@@ -5,29 +5,39 @@ require_once "autoload.php";
     use Projeto\Banco\Modelo\Cpf;
     use Projeto\Banco\Modelo\Pessoa;
     use Projeto\Banco\Modelo\Funcionario;
+    use Projeto\Banco\Modelo\Endereco;
+    use Projeto\Banco\Modelo\Conta\Titular;
+    use Projeto\Banco\Modelo\Conta\Conta;
+    use Projeto\Banco\Modelo\Conta\Poupanca;
+    use Projeto\Banco\Modelo\Conta\Corrente;
+    use Projeto\Banco\Service\ControladorBonificacao;
 
-    $cpf = new Cpf('021.716.486-27');
+    $cpf         = new Cpf('021.716.486-27');
     $pessoa      = new Pessoa("Lucas", $cpf);
-    $funcionario = new Funcionario("Lucas", $cpf, "Teste");
-    echo $funcionario->recuperarNome();
-    // print_r($funcionario);
+    $endereco    = new Endereco('Coronel Fabriciano', 'Melo Viana', 'Rua Maria de lourdes de Jesus', '102');
+    $titular     = new Titular($cpf, 'Lucas Mendes', $endereco);
 
-    // $endereco = new Endereco('Coronel Fabriciano', 'Melo Viana', 'Rua Maria de lourdes de Jesus', '102');
-    // $titular  = new Titular($cpf, 'Lucas Mendes', $endereco);
-    // $conta    = new Conta($titular);
+    $funcionario_1 = new Funcionario("Lucas", $cpf, "Teste", 2000);
+    $funcionario_2 = new Funcionario("Lucas", $cpf, "Teste", 1450);
 
-    // echo $conta->recuperarCpfTitular();
+    $bonificacao = new ControladorBonificacao();
+
+    $bonificacao->adicionarBonificacao($funcionario_1);
+    $bonificacao->adicionarBonificacao($funcionario_2);
+    echo $bonificacao->recuperarBonificacaoTotal();
+
+    // $contaCorrente = new Corrente($titular);
+    // $contaCorrente->depositar(200);
+
+    // $contaPoupanca = new Poupanca($titular);
+
+    // $contaCorrente->transferir(100,$contaPoupanca);
+
+    // echo $contaCorrente->exibirSaldo();
     // echo "<br>";
-
-    // echo $conta->recuperarNomeTitular();
-    // echo "<br>";
-
-    // $conta->depositar(200);
-    // echo $conta->exibirSaldo();
-    // echo "<br>";
-
-    // echo Conta::exibirNumeroContas();
-
+    // echo $contaPoupanca->exibirSaldo();
+    // // $conta->depositar(200);
+ 
 ?>
 <!-- <!DOCTYPE html>
 <html lang="pt-br">

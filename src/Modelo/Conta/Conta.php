@@ -2,13 +2,14 @@
 
 namespace Projeto\Banco\Modelo\Conta;
 
-use Projeto\Banco\Modelo\Titular;
+use Projeto\Banco\Modelo\Conta\Titular;
 
-class Conta
+abstract class Conta
 {
-    private $titular;
-    private $saldo;
-    private static $numeroContas = 0;
+    protected $titular;
+    protected $saldo;
+    protected static $numeroContas = 0;
+    protected $tipo;
 
     public function __construct(Titular $titular)
     {
@@ -23,14 +24,16 @@ class Conta
         self::$numeroContas--;
     }
     
-    public function sacar(float $valorSaldo)
+    public function sacar(float $valorSaque):void
     {
-        if($valorSaldo > $this->saldo){
+        $tarifa = $valorSaque * $this->porcentagemSaque();
+        $valorSaque += $tarifa;
+        if($valorSaque > $this->saldo){
             echo "Saldo invalido.";
             return;
         }
             
-        $this->saldo -= $valorSaldo;
+        $this->saldo -= $valorSaque;
     }
 
     public function depositar(float $valorDepositar):void
@@ -41,17 +44,6 @@ class Conta
         }
         
         $this->saldo += $valorDepositar;
-    }
-
-    public function transferir(float $valorTransferencia, Conta $contaDestino): void
-    {
-        if($this->saldo < $valorTransferencia){
-            echo "Saldo indisponivel.";
-            return;
-        }
-            
-        $this->sacar($valorTransferencia);
-        $contaDestino->depositar($valorTransferencia);
     }
 
     public function exibirSaldo():float
@@ -73,4 +65,6 @@ class Conta
     {
         return $this->titular->exibirCpf();
     }
+
+    abstract public function porcentagemSaque():float;
 }
