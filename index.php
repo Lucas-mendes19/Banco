@@ -4,27 +4,43 @@ require_once "autoload.php";
 
     use Projeto\Banco\Modelo\Cpf;
     use Projeto\Banco\Modelo\Pessoa;
-    use Projeto\Banco\Modelo\Funcionario;
+    use Projeto\Banco\Modelo\Funcionario\Funcionario;
+    use Projeto\Banco\Modelo\Funcionario\Gerente;
+    use Projeto\Banco\Modelo\Funcionario\Diretor;
+    use Projeto\Banco\Modelo\Funcionario\Desenvolvedor;
+    use Projeto\Banco\Modelo\Funcionario\EditorVideo;
     use Projeto\Banco\Modelo\Endereco;
     use Projeto\Banco\Modelo\Conta\Titular;
     use Projeto\Banco\Modelo\Conta\Conta;
     use Projeto\Banco\Modelo\Conta\Poupanca;
     use Projeto\Banco\Modelo\Conta\Corrente;
     use Projeto\Banco\Service\ControladorBonificacao;
+    use Projeto\Banco\Service\Autenticador;
 
     $cpf         = new Cpf('021.716.486-27');
     $pessoa      = new Pessoa("Lucas", $cpf);
     $endereco    = new Endereco('Coronel Fabriciano', 'Melo Viana', 'Rua Maria de lourdes de Jesus', '102');
     $titular     = new Titular($cpf, 'Lucas Mendes', $endereco);
 
-    $funcionario_1 = new Funcionario("Lucas", $cpf, "Teste", 2000);
-    $funcionario_2 = new Funcionario("Lucas", $cpf, "Teste", 1450);
+    $funcionario_1 = new Desenvolvedor("Lucas", $cpf, 2000);
+    $funcionario_1->sobeNivel();
 
-    $bonificacao = new ControladorBonificacao();
+    $funcionario_2 = new Gerente("Lucas", $cpf, 2000);
+    $funcionario_3 = new Diretor("Lucas", $cpf, 5000);
+    $funcionario_4 = new EditorVideo("Lucas", $cpf, 5000);
 
-    $bonificacao->adicionarBonificacao($funcionario_1);
-    $bonificacao->adicionarBonificacao($funcionario_2);
-    echo $bonificacao->recuperarBonificacaoTotal();
+    $funcionario_3->podeAutenticar('1234');
+
+    $autenticador = new Autenticador();
+    $autenticador->tentaLogin($funcionario_3, '122234');
+
+    // $bonificacao = new ControladorBonificacao();
+
+    // $bonificacao->adicionarBonificacao($funcionario_1);
+    // $bonificacao->adicionarBonificacao($funcionario_4);
+    // $bonificacao->adicionarBonificacao($funcionario_2);
+    // $bonificacao->adicionarBonificacao($funcionario_3);
+    // echo $bonificacao->recuperarBonificacaoTotal();
 
     // $contaCorrente = new Corrente($titular);
     // $contaCorrente->depositar(200);
